@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Rockband Last.fm Mashup</title>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssreset/reset-min.css">
+		<link href="style.css" type="text/css" media="screen" rel="stylesheet">
+        <!--[if !IE 7]>
+            <style type="text/css">
+                #container {display:table;height:100%}
+            </style>
+        <![endif]-->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+        <script type="text/javascript" src="jquery.timers-1.2.js"></script>
+        <!--
+        <script type="text/javascript" src="backbone-min.js"></script>
+        -->
+        <script type="text/javascript" src="lastrbfm.js"></script>
+        <script type="text/javascript" src="mustache.js"></script>
+        <script type="text/javascript" src="ich.min.js"></script>
+
+        <script id="trackList_template" type="text/html">
+            <div id="trackList">
+                <h2>RockBand Songs You Might Like</h2>
+                <ul>
+                    {{ tracklist }}
+                </ul>
+            </div>
+        </script>
+
+        <script id="track_template" type="text/html">
+            <li>{{ title }} by {{ artist }}</li>
+        </script>
+    </head>
+
+    <body>
+        <div id="container">
+            <header>
+                <div id="header">
+                    <div id="logo">
+                        <h1>lastrbfm</h1>
+                    </div>
+                </div>
+            </header>
+
+            <div id="body">
+                <div id="loginBox">
+                    <form action="/" method="post">
+                        <input type="text" id="lastfmUser" name="lastfmUser" />
+                    </form>
+                </div>
+
+            </div>
+            
+        </div>
+        <footer>
+            <div id="footer">
+                <p>&copy 2010 fourkB.</p>
+            </div>
+        </footer>
+    </body>
+</html>
+
+

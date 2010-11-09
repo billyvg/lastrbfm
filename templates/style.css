@@ -1,0 +1,86 @@
+html, body {height: 100%;}
+
+
+/*Opera Fix*/
+body:before {
+    content:"";
+    height:100%;
+    float:left;
+    width:0;
+    margin-top:-32767px;/
+}
+body {
+    background-color: #f2e9e1;
+    color: #cbe86b;
+    font:normal 14px Helvetica, Arial, Verdana, Tahoma, sans-serif;
+}
+
+#container {
+    background-color: #1c140d;
+    box-shadow: 3px 3px 4px #1c140d;
+    -webkit-box-shadow: 3px 3px 4px #1c140d;
+    -moz-box-shadow: 3px 3px 4px #1c140d;
+    min-height: 100%;
+    margin:0px auto;
+    padding: 5px 20px;
+    text-align:center;
+    width: 700px;
+}
+#header {
+    padding: 50px 0;
+}
+#header h1 {
+    font:bold 28px Helvetica, Arial, Verdana, Tahoma, sans-serif;
+}
+#body {
+    overflow:auto;
+    padding-bottom: 150px;
+}  
+#loginBox {
+    background-color: #cbe86b;
+    border:3px solid #f2e9e1;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    margin:0px auto;
+    padding:30px 10px;
+    width:500px;
+}
+#lastfmUser {
+    border:1px solid #fff;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    color: #1c140d;
+    font:normal 16px Helvetica, Arial, sans-serif;
+    padding:8px 3px;
+    width: 350px;
+}
+#loginBox .blur {
+    color:#999;
+    font-style: italic;
+}
+#trackList {
+    background-color: #cbe86b;
+    border:3px solid #f2e9e1;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    color: #1c140d;
+    margin:15px auto;
+    padding:10px;
+    width:500px;
+}
+#trackList h2 {
+    font:bold 20px Helvetica, Arial, sans-serif;
+    margin:10px 0;
+}
+#footer {
+    clear:both; 
+    height: 150px;
+    margin-top: -150px;
+    position: relative;
+
+    font-size: 11px;
+    text-align:center;
+}
+#footer p {
+    margin-top:55px;
+}
