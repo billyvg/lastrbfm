@@ -8,9 +8,9 @@ def deprint(s):
 	if DEBUG:
 		print s
 		
-API_SECRET = '2eabc2dd9f2d1364a7c84bcffdbc9901'
+
 API = 'a9785e0b1bb8deb9eb4e090b3aba9613'
-HOME = '/Users/jburkhart/work/pylist'
+
 
 ADMINS = (
 	('James Burkhart', 'jburkhart@gm.slc.edu'),
@@ -23,7 +23,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'pylist',                      # Or path to database file if using sqlite3.
+        'NAME': 'lastrbfm',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -86,16 +86,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-PID_DIRECTORY = os.path.join(HOME,'pids')
 
-ROOT_URLCONF = 'pylist.urls'
+ROOT_URLCONF = 'lastrbfm.urls'
 
-TEMPLATE_DIRS = (
-	os.path.join(HOME, 'templates').replace('\\','/'),
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -115,8 +109,8 @@ BEANSTALK_SERVER= '127.0.0.1:11300'
 try:
 # settings_mine overrides all other settings.
 	from django_settings_mine import *
-	deprint('Loaded local settings in settings_mine.py')
-	deprint('Loaded ')
+	deprint('Loaded local settings from django_settings_mine')
+	deprint('LASTRBFM')
 
 except ImportError:
 	pass
@@ -128,3 +122,9 @@ INSTALLED_APPS=INSTALLED_APPS+('django_extensions',)
 INSTALLED_APPS=INSTALLED_APPS+('debug_toolbar',)
 MIDDLEWARE_CLASSES=MIDDLEWARE_CLASSES+('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
+TEMPLATE_DIRS = (
+	os.path.join(HOME, 'templates').replace('\\','/'),
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)

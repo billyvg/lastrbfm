@@ -10,13 +10,16 @@ class AbstractContent(models.Model):
 		app_label = 'rb'
 		
 class UserProfile(AbstractContent):
-	user = models.ForeignKey(User,unique=True)
+	user = models.ForeignKey(User,unique=True,null=True,blank=True)
 	lfmusername=models.CharField(max_length=25)
-	artists = models.ManyToManyField('Artist')
+	artists = models.ManyToManyField('Artist',blank=True)
+	processed = models.DateTimeField(null=True,blank=True)
 	
 class Track(AbstractContent):
-	name = models.CharField(max_length=40)
+	name = models.CharField(max_length=100)
 	artist = models.ForeignKey('Artist',related_name='tracks')
+#	cover = models.BooleanField(null=True)
+	
 	
 class Artist(AbstractContent):
-	name = models.CharField(max_length=40)
+	name = models.CharField(max_length=100)
