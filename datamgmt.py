@@ -18,7 +18,7 @@
 
 __version__ = '0.2.0'
 API_KEY = 'a9785e0b1bb8deb9eb4e090b3aba9613'
-from pylist.settings import API_SECRET
+from lastrbfm.settings import API_SECRET
 SESSION_KEY = u'02675f176ccc949b43bf118224dcd06d'
 import cPickle as pickle
 import string
