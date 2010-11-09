@@ -85,16 +85,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-PID_DIRECTORY = os.path.join(HOME,'pids')
 
 ROOT_URLCONF = 'lastrbfm.urls'
 
-TEMPLATE_DIRS = (
-	os.path.join(HOME, 'templates').replace('\\','/'),
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -114,8 +108,8 @@ BEANSTALK_SERVER= '127.0.0.1:11300'
 try:
 # settings_mine overrides all other settings.
 	from django_settings_mine import *
-	deprint('Loaded local settings in settings_mine.py')
-	deprint('Loaded ')
+	deprint('Loaded local settings from django_settings_mine')
+	deprint('LASTRBFM')
 
 except ImportError:
 	pass
@@ -126,3 +120,10 @@ except Exception, e:
 INSTALLED_APPS=INSTALLED_APPS+('django_extensions',)
 INSTALLED_APPS=INSTALLED_APPS+('debug_toolbar',)
 MIDDLEWARE_CLASSES=MIDDLEWARE_CLASSES+('debug_toolbar.middleware.DebugToolbarMiddleware',)
+
+TEMPLATE_DIRS = (
+	os.path.join(HOME, 'templates').replace('\\','/'),
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)

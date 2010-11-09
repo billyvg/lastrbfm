@@ -13,6 +13,7 @@ class UserProfile(AbstractContent):
 	user = models.ForeignKey(User,unique=True)
 	lfmusername=models.CharField(max_length=25)
 	artists = models.ManyToManyField('Artist')
+	processed = models.DateTimeField(null=True,blank=True)
 	
 class Track(AbstractContent):
 	name = models.CharField(max_length=40)
