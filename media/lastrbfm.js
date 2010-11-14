@@ -47,7 +47,7 @@ $(function() {
 
     var lastFmUserRequest = function(user) {
         console.log("user request submitted");
-        $.get("getinfo?u="+user, function(data){lastFmUserCallback(data);});
+        $.get("/getinfo?lfmusername="+user, function(data){lastFmUserCallback(data);});
     };
 
     var lastFmUserCallback = function(data) {
@@ -63,7 +63,7 @@ $(function() {
         if (!track_dom.length) {
             console.log(tracks);
             tracklist_data = {
-                tracks: track_data
+                tracks: data
             }
             tracklist = ich.trackList_template(tracklist_data);
             
