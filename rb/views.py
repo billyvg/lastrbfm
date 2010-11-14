@@ -18,7 +18,7 @@ def user_page(request):
 	return user_page_ajax(request)
 	
 def user_page_ajax(request):
-	username = request.GET.get('u')
+	username = request.GET.get('lfmusername')
 	(profile,created) = UserProfile.objects.get_or_create(lfmusername=username)
 	if not profile.processed:
 		get_for_user(username)
