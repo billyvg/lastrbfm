@@ -22,13 +22,11 @@
             <div id="trackList">
                 <h2>RockBand Songs You Might Like</h2>
                 <ul>
-                    {{ tracklist }}
+                    {{#tracks}}
+                        <li><span class="title">{{title}}</span> by <span class="artist">{{artist}}</span></li>
+                    {{/tracks}}
                 </ul>
             </div>
-        </script>
-
-        <script id="track_template" type="text/html">
-            <li>{{ title }} by {{ artist }}</li>
         </script>
     </head>
 

@@ -59,19 +59,16 @@ $(function() {
             title: 'Test Track Title'
         }, {artist:'test artist 2', title: 'test track title 2'}];
 
-        var track_html = '';
-        for (var i = 0; i < track_data.length; i++) {
-            tracks = ich.track_template(track_data[i]);
-            track_html += tracks.text();
+        var track_dom = $("#trackList");
+        if (!track_dom.length) {
+            console.log(tracks);
+            tracklist_data = {
+                tracks: track_data
+            }
+            tracklist = ich.trackList_template(tracklist_data);
+            
+            $("#body").append(tracklist);
         }
-        console.log(tracks);
-        tracklist_data = {
-            tracklist: track_html
-        }
-        tracklist = ich.trackList_template(tracklist_data);
-        
-        $("#body").append(tracklist);
-        //console.log(data);
     };
 
 });
