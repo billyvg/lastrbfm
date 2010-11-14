@@ -1,4 +1,5 @@
 #**lastrbfm**#
 
-Awesome README begins here.
+This is a Django web app that will tell users what Rock Band DLC content is available from artists which you have listened to at least once based on your last.fm account listening history.
 
+It uses a 
