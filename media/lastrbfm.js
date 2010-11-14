@@ -47,7 +47,7 @@ $(function() {
 
     var lastFmUserRequest = function(user) {
         console.log("user request submitted");
-        $.get("index.html", function(data){lastFmUserCallback(data);});
+        $.get("getinfo?u="+user, function(data){lastFmUserCallback(data);});
     };
 
     var lastFmUserCallback = function(data) {

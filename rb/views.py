@@ -6,15 +6,19 @@ from rb.models import UserProfile,Track
 from rb.get_lfm_data import get_for_user
 import simplejson as json
 from django.template.context import RequestContext
+from django.template.loader import get_template
 
 def home(request):
-	render_to_response('homepage.html')
+	return render_to_response('index.html')
+	t = get_template('index.html')
+	html=t#.render()
+	return HttpResponse(html)
 	
 def user_page(request):
-	render_to_response('userpage.html')
+	return user_page_ajax(request)
 	
 def user_page_ajax(request):
-	username = request.GET.get('lfmusername')
+	username = request.GET.get('u')
 	(profile,created) = UserProfile.objects.get_or_create(lfmusername=username)
 	if not profile.processed:
 		get_for_user(username)
