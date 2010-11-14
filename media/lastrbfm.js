@@ -29,7 +29,7 @@ $(function() {
     $("#lastfmUser").keypress(function(event) {
         lastfm_user = $(this).val();
 
-        $(this).stopTime("ajax_get");
+        //$(this).stopTime("ajax_get");
 
         // enter pressed 
         if (event.keyCode === 13) {
@@ -37,11 +37,13 @@ $(function() {
             lastFmUserRequest(lastfm_user);
             return false;
         }
+		/*
         else {
             $(this).oneTime(650, "ajax_get", function() {
                 lastFmUserRequest(lastfm_user);
             });
         }
+		*/
     });
 
 
@@ -54,16 +56,12 @@ $(function() {
         var track_data, tracks, tracklist_data, tracklist;
 
         console.log("callback received");
-        track_data = [{ 
-            artist: 'Test Artist',
-            title: 'Test Track Title'
-        }, {artist:'test artist 2', title: 'test track title 2'}];
-
         var track_dom = $("#trackList");
         if (!track_dom.length) {
-            console.log(tracks);
+			track_data = JSON.parse(data);
+
             tracklist_data = {
-                tracks: data
+                tracks: track_data
             }
             tracklist = ich.trackList_template(tracklist_data);
             
