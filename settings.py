@@ -105,7 +105,6 @@ INSTALLED_APPS = (
 )
 
 INTERNAL_IPS = ('127.0.0.1',)
-BEANSTALK_SERVER= '127.0.0.1:11300'
 try:
 # settings_mine overrides all other settings.
 	from django_settings_mine import *
@@ -118,9 +117,10 @@ except ImportError:
 except Exception, e:
 	deprint('Error importing settings_mine.py: %s' % e)
 	
-INSTALLED_APPS=INSTALLED_APPS+('django_extensions',)
-INSTALLED_APPS=INSTALLED_APPS+('debug_toolbar',)
-MIDDLEWARE_CLASSES=MIDDLEWARE_CLASSES+('debug_toolbar.middleware.DebugToolbarMiddleware',)
+if locals().get('DJANGO_EXT'):
+	INSTALLED_APPS=INSTALLED_APPS+('django_extensions',)
+	INSTALLED_APPS=INSTALLED_APPS+('debug_toolbar',)
+	MIDDLEWARE_CLASSES=MIDDLEWARE_CLASSES+('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 TEMPLATE_DIRS = (
 	os.path.join(HOME, 'templates').replace('\\','/'),

@@ -15,9 +15,6 @@ def home(request):
 	return HttpResponse(html)
 	
 def user_page(request):
-	return user_page_ajax(request)
-	
-def user_page_ajax(request):
 	username = request.GET.get('lfmusername')
 	(profile,created) = UserProfile.objects.get_or_create(lfmusername=username)
 	if not profile.processed:
@@ -26,3 +23,6 @@ def user_page_ajax(request):
 	tracks_out = []
 	[tracks_out.append({'artist':track.artist.name,'title':track.name}) for track in tracks]
 	return HttpResponse(json.dumps(tracks_out),mimetype='application/javascript')
+	
+#	artists = [track.artist.name for track in tracks]
+#	for 
