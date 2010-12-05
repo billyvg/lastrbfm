@@ -6,10 +6,11 @@ from django.conf.urls.defaults import *
 from rb.views import home
 from rb.views import user_page
 urlpatterns = patterns('',
-					(r'^site_media/(?P<path>.*)$', 
+					(r'site_media/(?P<path>.*)$', 
 						'django.views.static.serve', 
 						{'document_root': 'media'}),
-						(r'^$',home),
+						(r'$^',home),
+						(r'lastrbfm',home),
 						(r'getinfo',user_page)
     # Example:
     # (r'^pylist/', include('pylist.foo.urls')),
