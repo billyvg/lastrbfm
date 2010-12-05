@@ -3,11 +3,14 @@ Created on Nov 8, 2010
 
 @author: jburkhart
 '''
-from settings import API,API_SECRET
+from settings import API
 from rb.models import Artist,UserProfile
 import subprocess
 import datetime
-import simplejson as json
+try:
+	import json
+except ImportError:
+	import simplejson as json
 import time
 import urllib2
 
@@ -20,7 +23,7 @@ def get_for_user(username):
 	procs = []
 	for page in range(2,int(info.get('totalPages'))+1):
 		procs.append(subprocess.Popen(["curl", "%s"%get_url(username,page=page)], shell=False, stdout=subprocess.PIPE))
-		time.sleep(0.1)
+		time.sleep(0.3)
 	done = False
 #	return procs
 	while not done:
@@ -28,8 +31,10 @@ def get_for_user(username):
 		time.sleep(0.5)
 		print 'WAITIN'
 	for proc in procs:
-		p = json.loads(proc.communicate()[0])
-		handleresp(user,p)
+		resp = proc.communicate()[0]
+		if resp:
+			p = json.loads(proc.communicate()[0])
+			handleresp(user,p)
 	user.processed = datetime.datetime.now()
 	user.save()
 	print 'THIS TOOK THIS LONG TO EXECUTE:',time.time()-start
@@ -48,6 +53,7 @@ def get_resp(username,page=1):
 	return json.loads(reply.read())
 
 def make_artist(user,artist):
+	print artist.get('name')
 	try:
 		a = Artist.objects.get(name=artist.get('name'))
 	except:
@@ -56,4 +62,4 @@ def make_artist(user,artist):
 	user.artists.add(a)
 	
 def check_done(procs):
-	return not 0 in [proc.poll() for proc in procs]
+	return not None in [proc.poll() for proc in procs]
