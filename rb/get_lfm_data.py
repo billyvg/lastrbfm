@@ -45,7 +45,10 @@ def get_page(username,page=1):
 	return json.loads(reply.read())
 
 def make_artist(user,artist):
-	print artist.get('name')
+	try:
+		print artist.get('name')
+	except:
+		print 'error!'
 	try:
 		a = Artist.objects.get(name=artist.get('name'))
 	except:
