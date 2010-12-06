@@ -127,6 +127,6 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-LOG_DIRECTORY = '/opt/bitnami/projects/lastrbfm/log'
+LOG_DIRECTORY = '/opt/bitnami/projects/lastrbfm/log/'
 BEANSTALK_SERVER = "127.0.0.1:11300"
 BEANSTALK_JOB_NAME = '%(app)s.%(job)s'
