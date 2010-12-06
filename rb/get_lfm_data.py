@@ -15,16 +15,21 @@ import time
 import urllib2
 API = settings.API
 def get_for_user(username):
-	user = UserProfile.objects.get(lfmusername=username)
-	client = BeanstalkClient()
-	response = get_page(username=username)
-	info = response['artists']['@attr']
-	handle_resp(user,response)
-	for page in range(2,int(info.get('totalPages'))+1):
-		job_data = {'uname':username,'page':page}
-		client.call('rb.processpage',json.dumps(job_data))
-	user.processed = datetime.datetime.now()
-	user.save()
+	try:
+		user = UserProfile.objects.get(lfmusername=username)
+		client = BeanstalkClient()
+		response = get_page(username=username)
+		info = response['artists']['@attr']
+		handle_resp(user,response)
+		for page in range(2,int(info.get('totalPages'))+1):
+			job_data = {'uname':username,'page':page}
+			client.call('rb.processpage',json.dumps(job_data))
+		user.processed = datetime.datetime.now()
+		user.save()
+	except Exception, e:
+		f=open(settings.LOG_DIRECTORY+"getforuser","a")
+		f.write(e+'\n')
+		f.close()
 	
 def handle_resp(user,resp):
 	artists = resp['artists']['artist']
