@@ -28,7 +28,7 @@ def get_for_user(username):
 		user.save()
 	except Exception, e:
 		f=open(settings.LOG_DIRECTORY+"getforuser","a")
-		f.write(e+'\n')
+		f.write(str(e)+'\n')
 		f.close()
 	
 def handle_resp(user,resp):

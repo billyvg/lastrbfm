@@ -38,7 +38,7 @@ def user_page(request):
 				'progress':progess_str}
 	except Exception, e:
 		f=open(settings.LOG_DIRECTORY+"viewlog","a")
-		f.write(e+'\n')
+		f.write(str(e)+'\n')
 		f.close()
 	return HttpResponse(json.dumps(data_out),mimetype='application/javascript')
 #	artists = [track.artist.name for track in tracks]
