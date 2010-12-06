@@ -25,7 +25,7 @@ def user_page(request):
 		if not profile.processed:
 			get_for_user(username)
 		try:
-			progess_str = '%s of %s pages of results processed... Reload the page in a few minutes for more results.'\
+			progress_str = '%s of %s pages of results processed... Reload the page in a few minutes for more results.'\
 				%(profile.pages_loaded.count('1'),len(profile.pages_loaded))
 		except Exception:
 			progress_str = "Results 5% processed. Please wait a few moments and reload the page for full results. It can take up to a minute to retrieve all your artists from last.fm"
@@ -37,7 +37,7 @@ def user_page(request):
 		
 		data_out = {'tracks':tracks_out,
 				'username':username,
-				'progress':progess_str}
+				'progress':progress_str}
 	except Exception, e:
 		f=open(settings.LOG_DIRECTORY+"viewlog","a")
 		f.write(str(e)+'\n')
