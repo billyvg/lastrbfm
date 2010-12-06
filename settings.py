@@ -99,6 +99,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'rb',
+    'django_beanstalkd',
 )
 
 INTERNAL_IPS = ('127.0.0.1',)
@@ -125,3 +126,6 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
+BEANSTALK_SERVER = "127.0.0.1:11300"
+BEANSTALK_JOB_NAME = '%(app)s.%(job)s'

@@ -14,6 +14,7 @@ class UserProfile(AbstractContent):
 	lfmusername=models.CharField(max_length=25)
 	artists = models.ManyToManyField('Artist',blank=True)
 	processed = models.DateTimeField(null=True,blank=True)
+	pages_loaded = models.CharField(max_length=120,null=True,blank=True)
 	
 class Track(AbstractContent):
 	name = models.CharField(max_length=100)

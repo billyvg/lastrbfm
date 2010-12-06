@@ -22,10 +22,18 @@ def user_page(request):
 	(profile,created) = UserProfile.objects.get_or_create(lfmusername=username)
 	if not profile.processed:
 		get_for_user(username)
-	artists = [artist for artist in profile.artists.all()]
-	tracks = Track.objects.filter(artist__in=artists).order_by('artist__name')
+	
+	progess_str = '%s of %s pages of results processed... Reload the page in a few minutes for more results.'\
+		%(profile.pages_loaded.count('1'),len(profile.pages_loaded))
+	
+	artists = list(profile.artists.all())
+	tracks = Track.objects.filter(artist__in=artists).select_related('artist').order_by('artist__name')
 	tracks_out = []
 	[tracks_out.append({'artist':track.artist.name,'title':track.name}) for track in tracks]
-	return HttpResponse(json.dumps(tracks_out),mimetype='application/javascript')
+	
+	data_out = {'tracks':tracks_out,
+			'username':username,
+			'progress':progess_str}
+	return HttpResponse(json.dumps(data_out),mimetype='application/javascript')
 #	artists = [track.artist.name for track in tracks]
 #	for 

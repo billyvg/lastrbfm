@@ -3,9 +3,9 @@ Created on Nov 8, 2010
 
 @author: jburkhart
 '''
-from settings import API
+from django.conf import settings
 from rb.models import Artist,UserProfile
-import subprocess
+from django_beanstalkd import BeanstalkClient
 import datetime
 try:
 	import json
@@ -13,41 +13,33 @@ except ImportError:
 	import simplejson as json
 import time
 import urllib2
-
+API = settings.API
 def get_for_user(username):
-	start = time.time()
 	user = UserProfile.objects.get(lfmusername=username)
-	response = get_resp(username=username)
+	client = BeanstalkClient()
+	response = get_page(username=username)
 	info = response['artists']['@attr']
-	handleresp(user,response)
-	procs = []
+	handle_resp(user,response)
 	for page in range(2,int(info.get('totalPages'))+1):
-		procs.append(subprocess.Popen(["curl", "%s"%get_url(username,page=page)], shell=False, stdout=subprocess.PIPE))
-		time.sleep(0.3)
-	done = False
-#	return procs
-	while not done:
-		done = check_done(procs)
-		time.sleep(0.5)
-		print 'WAITIN'
-	for proc in procs:
-		resp = proc.communicate()[0]
-		if resp:
-			p = json.loads(proc.communicate()[0])
-			handleresp(user,p)
+		job_data = {'uname':username,'page':page}
+		client.call('rb.process_page',json.dumps(job_data))
 	user.processed = datetime.datetime.now()
 	user.save()
-	print 'THIS TOOK THIS LONG TO EXECUTE:',time.time()-start
 	
-def handleresp(user,resp):
+def handle_resp(user,resp):
 	artists = resp['artists']['artist']
 	for artist in artists:
 		make_artist(user,artist)
-
+	pagecomplete = int(resp['artists']['@attr']['page'])
+	if not user.pages_loaded:
+		user.pages_loaded = '0'*int(resp['artists']['@attr']['totalPages'])
+	user.pages_loaded = user.pages_loaded[:pagecomplete-1]+'1'+user.pages_loaded[pagecomplete:]
+	user.save()
+	
 def get_url(username,page=1):
 	return 'http://ws.audioscrobbler.com/2.0/?method=library.getartists&api_key=%s&user=%s&format=json&page=%s'%(API,username,page)
 
-def get_resp(username,page=1):
+def get_page(username,page=1):
 	print 'PAGENUMBER',page
 	reply = urllib2.urlopen(get_url(username,page))
 	return json.loads(reply.read())
@@ -60,6 +52,3 @@ def make_artist(user,artist):
 		a = Artist(name=artist.get('name'))
 		a.save()
 	user.artists.add(a)
-	
-def check_done(procs):
-	return not None in [proc.poll() for proc in procs]
