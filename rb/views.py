@@ -28,8 +28,7 @@ def user_page(request):
 			progess_str = '%s of %s pages of results processed... Reload the page in a few minutes for more results.'\
 				%(profile.pages_loaded.count('1'),len(profile.pages_loaded))
 		except Exception:
-			"Results 5% processed. Please wait a few moments and reload the page for full results. It can take up to a minute to retrieve all your artists from last.fm"
-			pass
+			progress_str = "Results 5% processed. Please wait a few moments and reload the page for full results. It can take up to a minute to retrieve all your artists from last.fm"
 		
 		artists = list(profile.artists.all())
 		tracks = Track.objects.filter(artist__in=artists).select_related('artist').order_by('artist__name')
