@@ -13,7 +13,7 @@ except ImportError:
 	import simplejson as json
 	
 @beanstalk_job
-def process_page(in_str):
+def processpage(in_str):
 	'''in_str will be a json serialized object of the following format
 	{
 		'uname':string,

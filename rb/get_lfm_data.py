@@ -22,7 +22,7 @@ def get_for_user(username):
 	handle_resp(user,response)
 	for page in range(2,int(info.get('totalPages'))+1):
 		job_data = {'uname':username,'page':page}
-		client.call('rb.process_page',json.dumps(job_data))
+		client.call('rb.processpage',json.dumps(job_data))
 	user.processed = datetime.datetime.now()
 	user.save()
 	
