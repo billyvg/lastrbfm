@@ -62,6 +62,8 @@ $(function() {
     };
 
     var lastFmUserCallback = function(data) {
+      $('#containertest').html(data);
+    /*
         var track_data, tracks, tracklist_data, tracklist, progress;
 
         console.log("callback received");
@@ -77,7 +79,7 @@ $(function() {
             progress = track_data['progress'];
             $("#body").append(progress);
             $("#body").append(tracklist);
-        }
+        }*/
     };
 
 });

@@ -4,8 +4,9 @@ Created on Nov 8, 2010
 @author: jburkhart
 '''
 from django.conf import settings
-from rb.models import Artist,UserProfile
+from rb.models import Artist,UserProfile,UserArtist
 from django_beanstalkd import BeanstalkClient
+from django.core.exceptions import ObjectDoesNotExist 
 import datetime
 try:
 	import json
@@ -27,6 +28,8 @@ def get_for_user(username):
 		user.processed = datetime.datetime.now()
 		user.save()
 	except Exception, e:
+		if settings.DEBUG:
+			raise
 		f=open(settings.LOG_DIRECTORY+"getforuser","a")
 		f.write(str(e)+'\n')
 		f.close()
@@ -50,13 +53,37 @@ def get_page(username,page=1):
 	return json.loads(reply.read())
 
 def make_artist(user,artist):
+	'''user is a UserProfile object,
+	artist is the json object returned by lastfm, of the following format:
+	{u'image': [{u'#text': u'http://userserve-ak.last.fm/serve/34/9269.jpg',
+             u'size': u'small'},
+            {u'#text': u'http://userserve-ak.last.fm/serve/64/9269.jpg',
+             u'size': u'medium'},
+            {u'#text': u'http://userserve-ak.last.fm/serve/126/9269.jpg',
+             u'size': u'large'},
+            {u'#text': u'http://userserve-ak.last.fm/serve/252/9269.jpg',
+             u'size': u'extralarge'},
+            {u'#text': u'http://userserve-ak.last.fm/serve/500/9269/Ratatat.jpg',
+             u'size': u'mega'}],
+	 u'mbid': u'f467181e-d5e0-4285-b47e-e853dcc89ee7',
+	 u'name': u'Ratatat',
+	 u'playcount': u'780',
+	 u'streamable': u'1',
+	 u'tagcount': u'0',
+	 u'url': u'http://www.last.fm/music/Ratatat'}
+	 '''
 	try:
 		print artist.get('name')
 	except:
 		print 'error!'
 	try:
 		a = Artist.objects.get(name=artist.get('name'))
-	except:
+	except ObjectDoesNotExist:
 		a = Artist(name=artist.get('name'))
 		a.save()
-	user.artists.add(a)
+	try:
+		relation = UserArtist.objects.get(useraccount=user, artist=a)
+	except ObjectDoesNotExist:
+		relation = UserArtist(useraccount=user, artist=a)
+	relation.listens = int(artist.get('playcount')) 
+	relation.save()
