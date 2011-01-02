@@ -1,0 +1,50 @@
+<html>
+  <div class="grid_2"></div>
+  <div class="grid_8" class="progress"></div>
+  <div class="clear"></div>
+  <div class="grid_10 push_1" id="testing">
+    <h2>
+    {{progress}}
+    </h2>
+  </div>
+  {% for artist in music %}
+  <div class="artist_container grid_10 push_1">
+    <h2>{{artist.name}} - {{artist.listens}} Listens - {{artist.tracks|length}} Songs</h2>
+    <table class="track_list">
+      <thead>
+        <tr>
+          <th style="width:150px;">Song Title</th>
+          <th>Source</th>
+          <th>Genre</th>
+          <th>Cover?</th>
+          <th>O</th>
+          <th>V</th>
+          <th>G</th>
+          <th>B</th>
+          <th>D</th>
+          <th>K</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for track in artist.tracks %}
+        <tr>
+          <td>{{track.name}}</td>
+          <td>{{track.source}}</td>
+          <td>{{track.genre_symbol}}</td>
+          <td>{%if track.cover%}True{% else %}{%endif%}</td>
+          <td>{{track.difficulty_band}}</td>
+          <td>{{track.difficulty_vocals}}</td>
+          <td>{{track.difficulty_guitar}}</td>
+          <td>{{track.difficulty_bass}}</td>
+          <td>{{track.difficulty_drums}}</td>
+          <td>{{track.difficulty_keys}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      
+    </table>
+  </div>
+  <div class="clear"></div>
+  {% endfor %}
+  <div class="clear"></div>
+</html>
