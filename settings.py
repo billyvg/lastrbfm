@@ -126,8 +126,8 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+#SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 LOG_DIRECTORY = '/opt/bitnami/projects/lastrbfm/log/'
 BEANSTALK_SERVER = "127.0.0.1:11300"
 BEANSTALK_JOB_NAME = '%(app)s.%(job)s'
-CACHE_BACKEND = 'memcached://localhost:11211/'
+#CACHE_BACKEND = 'memcached://localhost:11211/'
