@@ -6,6 +6,7 @@ from rb.models import UserProfile,Track,UserArtist
 from rb.get_lfm_data import get_for_user
 from django.conf import settings
 from django.views.decorators.cache import cache_page
+from rb.update_dlc import get_all
 import operator
 
 try:
@@ -26,6 +27,8 @@ def user_page(request):
 #	return render_to_response('ajax.html')
 #	return HttpResponse(t,mimetype='text/html')
 	try:
+		if len(Track.objects.all()) == 0:
+			get_all()
 		username = request.GET.get('lfmusername')
 		(profile,created) = UserProfile.objects.get_or_create(lfmusername=username)
 		if not profile.processed:
