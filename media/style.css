@@ -93,7 +93,7 @@ body:before {
 }
 */
 #loginBox {
-    background-color: #0099ff;
+    background-color: #003366;
     border:3px solid #f2e9e1;
     border-radius:5px;
     -moz-border-radius:5px;
@@ -107,10 +107,10 @@ body:before {
 
 }
 #lastfmUser {
+    color:#1C140D;
     border:5px solid #9fddf2;
     border-radius:3px;
     -moz-border-radius:3px;
-    color: #1c140d;
     font:normal 16px Helvetica, Arial, sans-serif;
     padding:8px 3px;
     width: 350px;
@@ -123,7 +123,7 @@ body:before {
     margin-top:-125px;
     text-align:center;
 }
-#fuckcss {
+#spacing {
   padding-top:15px;
 }
 #container {
@@ -144,7 +144,7 @@ body:before {
   -moz-box-shadow: inset 0px 0px 5px #888;
   -webkit-box-shadow: inset 0px 0px 5px #888;
   box-shadow: inset 0px 0px 5px #888;
-  margin: 10px 0px 50px 0px;
+  margin: 10px 0px 15px 0px;
   padding: 5px 5px 5px 5px;
   -moz-border-radius-topright: 1em;
   -moz-border-radius-topleft: 1em;
@@ -152,6 +152,9 @@ body:before {
   -webkit-border-radius-topleft: 1em;
   border-top-right-radius: 1em;
   border-top-left-radius: 1em;
+}
+.nopacity {
+  opacity: 1.0;
 }
 table{
   width:100%;
@@ -170,7 +173,7 @@ tbody {
 }
 body {
     background-color: #f2e9e1;
-    color: #669933;
+    color: #ffffff;
     font:normal 14px Helvetica, Arial, Verdana, Tahoma, sans-serif;
 }
 h2 {

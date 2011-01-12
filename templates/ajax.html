@@ -28,16 +28,18 @@
       <tbody>
         {% for track in artist.tracks %}
         <tr>
-          <td>{{track.name}}</td>
-          <td>{{track.source}}</td>
-          <td>{{track.genre_symbol}}</td>
-          <td>{%if track.cover%}True{% else %}{%endif%}</td>
-          <td>{{track.difficulty_band}}</td>
-          <td>{{track.difficulty_vocals}}</td>
-          <td>{{track.difficulty_guitar}}</td>
-          <td>{{track.difficulty_bass}}</td>
-          <td>{{track.difficulty_drums}}</td>
-          <td>{{track.difficulty_keys}}</td>
+          <span class="nopacity">
+            <td>{{track.name}}</td>
+            <td>{{track.source}}</td>
+            <td>{{track.genre_symbol}}</td>
+            <td>{%if track.cover%}True{% else %}{%endif%}</td>
+            <td>{{track.difficulty_band}}</td>
+            <td>{{track.difficulty_vocals}}</td>
+            <td>{{track.difficulty_guitar}}</td>
+            <td>{{track.difficulty_bass}}</td>
+            <td>{{track.difficulty_drums}}</td>
+            <td>{{track.difficulty_keys}}</td>
+          </span>
         </tr>
         {% endfor %}
       </tbody>

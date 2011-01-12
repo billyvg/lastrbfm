@@ -4,7 +4,10 @@ Created on Nov 8, 2010
 @author: jburkhart
 '''
 import urllib2
-import simplejson as json
+try:
+	import simplejson as json
+except:
+	import json
 from django.core.exceptions import ObjectDoesNotExist 
 from rb.models import Track,Artist
 

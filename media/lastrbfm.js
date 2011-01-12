@@ -55,14 +55,15 @@ $(function() {
     var lastFmUserRequest = function(user) {
         console.log("user request submitted");
         try {
-        $.get("/getinfo?lfmusername="+user, function(data){
-          lastFmUserCallback(data);
-        });
+          $('#results').show();
+          $.get("/getinfo?lfmusername="+user, function(data){
+            lastFmUserCallback(data);
+          });
         } catch(err) {console.log(err)}
     };
 
     var lastFmUserCallback = function(data) {
-      $('#containertest').html(data);
+      $('#results').html(data);
     /*
         var track_data, tracks, tracklist_data, tracklist, progress;
 
